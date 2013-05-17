@@ -1,5 +1,8 @@
-# :enddoc:
-require 'test/unit/testcase'
+begin
+  # if present, then also loads MiniTest::Unit::TestCase
+  ActiveSupport::TestCase
+rescue
+end
 
 if defined?(ActionController)
   require 'shoulda/matchers/action_controller'
@@ -18,8 +21,8 @@ if defined?(ActiveRecord)
   require 'shoulda/matchers/active_record'
   require 'shoulda/matchers/active_model'
 
-  module Test
-    module Unit
+  module MiniTest
+    class Unit
       class TestCase
         include Shoulda::Matchers::ActiveRecord
         extend Shoulda::Matchers::ActiveRecord
@@ -31,8 +34,8 @@ if defined?(ActiveRecord)
 elsif defined?(ActiveModel)
   require 'shoulda/matchers/active_model'
 
-  module Test
-    module Unit
+  module MiniTest
+    class Unit
       class TestCase
         include Shoulda::Matchers::ActiveModel
         extend Shoulda::Matchers::ActiveModel
